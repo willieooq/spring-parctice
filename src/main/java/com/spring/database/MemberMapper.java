@@ -5,8 +5,9 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//MemberDTO
 public class MemberMapper implements RowMapper<Member> {
-
+    // TODO model mapper
     public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
         Member member = new Member();
         member.setId(rs.getInt("ID"));

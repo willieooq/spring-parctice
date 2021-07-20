@@ -5,12 +5,10 @@ import com.spring.database.Member;
 import com.spring.database.MemberJDBCTemplate;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Scanner;
 
-@Service
 public class main {
     public static void main(String[] args) {
         int choice = 0;
@@ -30,8 +28,9 @@ public class main {
         }
         //結束程式
         else {return;}
+        //登入成功後才會執行以下程式
         do {
-            System.out.println("1.透過名稱查詢\n2.新增資料(註冊)\n3.更新資料\n4.刪除資料\n5.離開本程式");
+            System.out.println("1.透過名稱查詢\n2.新增資料(註冊)\n3.更新密碼\n4.刪除資料\n5.離開本程式");
             try {
                 choice = scanner.nextInt();
             }catch (Exception e){
@@ -40,8 +39,8 @@ public class main {
             }
             switch (choice){
                 case 1:
-                    //查詢
-                    System.out.print("輸入要帳號: ");
+                    //查詢帳號(測試用，之後應該會廢棄，想不到這能放在什麼功能)
+                    System.out.print("輸入要查詢的帳號: ");
                     input[0] = scanner.next();
                     List<Member> members = memberJDBCTemplate.listMembers(input[0]);
                     for(Member member : members){
@@ -50,13 +49,16 @@ public class main {
                         System.out.println(", Last login : " + member.getLast_login());
                     }
                     break;
+                // case 2,3 之後會加上輸入兩次密碼檢驗，以防有人打錯
                 case 2:
+                    //註冊帳號
                     database.register_account(id,memberJDBCTemplate,input,scanner);
                     break;
                 case 3:
                     //更新密碼
                     database.update_password(id,memberJDBCTemplate,input,scanner);
                     break;
+                //刪除帳戶資訊(練習用，目前想不到他的其他功用)
                 case 4:
                     //刪除資料
                     memberJDBCTemplate.delete(id);
@@ -71,5 +73,4 @@ public class main {
         }while (choice != 5);//輸入5離開程式
     }//end main
 
-
-}
+}//end class

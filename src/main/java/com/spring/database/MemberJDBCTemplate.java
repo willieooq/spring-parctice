@@ -3,15 +3,15 @@ package com.spring.database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.sql.Date;
 import java.util.List;
 
 @Repository
 public class MemberJDBCTemplate implements MemberDAO{
 
+    @Resource
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
@@ -47,7 +47,7 @@ public class MemberJDBCTemplate implements MemberDAO{
     public void delete(int id) {
         String sql = "delete from memberaccount";
         jdbcTemplate.update(sql,id);
-        System.out.println("已刪除 ID:"+id);
+        System.out.println("已刪除此帳號");
     }
 
     @Override
